@@ -8,7 +8,8 @@ def main():
     #plotDistanceInLensApprox(1.5)
     #plt.ylim(0.430,0.460)
     #plt.show()
-    plotDistanceInLensbk7(plotbk7())
+    wl = n.linspace(0.4, 0.7 , 1000)
+    plotDistanceInLensbk7(plotbk7(wl), wl)
     plt.show()
 
 
@@ -23,7 +24,7 @@ def plotDistanceInLens(n2):
     #plt.figure()
     plt.plot(h, f2+R)
 
-def plotDistanceInLensbk7(n2):
+def plotDistanceInLensbk7(n2, wl):
     n1 = 1
     R = 0.15
     h = 0.025
@@ -32,7 +33,7 @@ def plotDistanceInLensbk7(n2):
     gamma = a1-a2
     f2=R*n.sin(a2)/n.sin(gamma)
     plt.figure()
-    plt.plot(n2, f2+R)
+    plt.plot(wl, f2+R)
 
 def plotDistanceInLensApprox(n2):
     n1 = 1
@@ -46,8 +47,8 @@ def plotDistanceInLensApprox(n2):
     plt.plot(h, f2+R)
 
 
-def plotbk7():
-    wl = n.linspace(0.4, 0.7 , 1000)
+def plotbk7(wl):
+
     plt.figure()
     bk7 = calcbk7(wl)
     plt.plot(wl, bk7)
