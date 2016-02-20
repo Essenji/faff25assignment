@@ -16,9 +16,15 @@ def plotReflection(n1, n2):
     sums = a1 + a2
     Rs = n.abs(n.sin(diffs) / n.sin(sums)) ** 2
     Rp = n.abs(n.tan(diffs) / n.tan(sums)) ** 2
+    brewster = n.arctan(n2/n1)
+    totalRef = n.arcsin(n2/n1)
+
     plt.figure()
+    plt.plot((brewster, brewster), (-100, 100), "r")
+    plt.plot((totalRef, totalRef), (-100, 100), "y")
     plt.plot(a1, Rs)
     plt.plot(a1, Rp)
+    plt.ylim(0,1)
 
 
 
