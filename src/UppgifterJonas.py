@@ -84,14 +84,29 @@ def intensity(x, l):
 
 
 def intensitySlits(x, l, n):
-
     b = 100e-6
-    d = b/n
-    lmbd = 632e-9
-    sintheta = x / np.sqrt(x**2 + l**2)
-    gamma = pi*d/lmbd *sintheta
-    intens = (sin(n*gamma)/sin(gamma))**2
-    return intens
+    ls=[]
+    d = b / n
+    for i in range(0, n):
+        ls.append(intensity(x+i*d,l)/(n*2))
+        ls.append(intensity(x-i*d,l)/(n*2))
+
+    return sum(ls)
+        # l=[]
+    # for i in range(0 ,n):
+    #     l.append(intensity(x,l))
+
+    # return sum(intensity(x,l) for i in range(0,n))
+
+
+    #
+    # b = 100e-6
+    # d = b/n
+    # lmbd = 632e-9
+    # sintheta = x / np.sqrt(x**2 + l**2)
+    # gamma = pi*d/lmbd *sintheta
+    # intens = (sin(n*gamma)/sin(gamma))**2
+    # return intens
 
 def main():
     # plt.subplot(2, 1, 1)
@@ -117,29 +132,29 @@ def main():
     # f = plotChromaticAbb(0.025, n)
     # plt.plot(wl,f, "g")
     # plt.show()
-    nbrslits = 10;
+    halfnbrSlits = 20;
     points = np.linspace(-0.02, 0.02, 20000)
     plt.subplot(4, 1, 1)
     plt.plot(points, intensity(points, 1), label="1m")
-    plt.plot(points, intensitySlits(points, 1,nbrslits), label="1m")
+    plt.plot(points, intensitySlits(points, 1,halfnbrSlits), label="1m")
 
     plt.subplot(4, 1, 2)
     points = np.linspace(-0.002, 0.002, 20000)
 
     plt.plot(points, intensity(points, 0.1), label="0.1m")
-    plt.plot(points, intensitySlits(points, 0.1,nbrslits), label="0.1m")
+    plt.plot(points, intensitySlits(points, 0.1,halfnbrSlits), label="0.1m")
 
     plt.subplot(4, 1, 3)
     points = np.linspace(-0.0002, 0.0002, 20000)
 
     plt.plot(points, intensity(points, 0.01), label="0.01m")
-    plt.plot(points, intensitySlits(points, 0.01,nbrslits), label="0.01m")
+    plt.plot(points, intensitySlits(points, 0.01,halfnbrSlits), label="0.01m")
 
     plt.subplot(4, 1, 4)
     points = np.linspace(-0.00002, 0.00002, 20000)
 
     plt.plot(points, intensity(points, 0.001), label="0.001m")
-    plt.plot(points, intensitySlits(points, 0.001,nbrslits), label="0.001m")
+    plt.plot(points, intensitySlits(points, 0.001,halfnbrSlits), label="0.001m")
 
 
 
