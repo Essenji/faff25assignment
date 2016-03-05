@@ -4,23 +4,29 @@ import matplotlib.pyplot as plt
 
 
 def main():
-    #plotDistanceInLens(1.5)
-    #plotDistanceInLensApprox(1.5)
-    #plt.ylim(0.430,0.460)
-    #plt.show()
+    h = n.linspace(0, 0.05, 1000)
+    plt.plot(h,plotDistanceInLens(1.5), label="Nonparaxial")
+    plt.plot(h,plotDistanceInLensApprox(1.5), label="Paraxial")
+    plt.legend()
+    plt.xlabel("h (m)")
+    plt.ylabel("f (m)")
+    plt.ylim(0.430,0.460)
     wl = n.linspace(0.4, 0.7 , 1000)
+
     plotDistanceInLensbk7(plotbk7(wl), wl)
+    plt.legend()
     plt.show()
 
 
 def plotDistanceInLens(n2):
     n1 = 1
     R = 0.15
-    h = n.linspace(0, 0.05 , 1000)
+    h = n.linspace(0, 0.05, 1000)
     a1 = n.sin(h/R) #Trig ger infallande vinkel
     a2=n.arcsin(n1/n2*n.sin(a1))
     gamma = a1-a2 #gamma = 180 - (180 - a1) - a2
     f2=R*n.sin(a2)/n.sin(gamma)
+    return f2+R
     #plt.figure()
     plt.plot(h, f2+R)
 
@@ -32,26 +38,39 @@ def plotDistanceInLensbk7(n2, wl):
     a2=n.arcsin(n1/n2*n.sin(a1))
     gamma = a1-a2
     f2=R*n.sin(a2)/n.sin(gamma)
-    plt.figure()
-    plt.plot(wl, f2+R)
+    # plt.figure()
+    plt.plot(wl, f2+R, label="Chromatic Abberation")
+    plt.xlabel("Wavelength (µm)")
+    plt.ylabel("f (m)")
+    plt.legend()
+    return f2+R
+
+# def plotDistanceInLensApprox(n2):
+#     n1 = 1
+#     R = 0.15
+#     h = n.linspace(0, 0.05 , 1000)
+#     plt.hlines(n2/((n2-n1)/R), -100, 100)
 
 def plotDistanceInLensApprox(n2):
     n1 = 1
     R = 0.15
-    h = n.linspace(0, 0.05 , 1000)
+    h = n.linspace(0, 0.05, 1000)
     a1 = h/R
     a2=n1/n2*a1
     gamma = a1-a2
     f2=R*a2/gamma
     #plt.figure()
+    return f2+R
     plt.plot(h, f2+R)
 
 
 def plotbk7(wl):
-
     plt.figure()
     bk7 = calcbk7(wl)
-    plt.plot(wl, bk7)
+    plt.plot(wl, bk7, label="BK7")
+    plt.xlabel("Wavelength (µm)")
+    plt.ylabel("n")
+    plt.legend()
     plt.show()
     return bk7
 
@@ -67,3 +86,4 @@ def calcbk7(wl):
     return n.sqrt(q)
 
 main()
+

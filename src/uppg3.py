@@ -9,13 +9,13 @@ def main():
     :return:
     """
     L = n.array([1, 0.1, 0.01, 0.001]) # Distance from screen to slit
-    N = 20 # Number of slits (only used in Fresnel)
+    N = 5 # Number of slits (only used in Fresnel)
     x = [n.linspace(-0.02*i, 0.02*i, 1000) for i in L]
     for index, i in enumerate(L):
         plt.subplot(2,2,1+index)
         plt.plot(x[index], fraunhofer(x[index], i), label="Fraunhofer")
         plt.plot(x[index], fresnel(x[index], i, N), label="Fresnel")
-        plt.xlabel("x")
+        plt.xlabel("x (m)")
         plt.ylabel("Intensity")
         plt.axis([-0.02*i,0.02*i, 0, 1])
         plt.legend()
