@@ -1,8 +1,7 @@
-import matplotlib as mp
 import numpy as n
 import matplotlib.pyplot as plt
 
-
+#Code by Jonas Danebjer (kin13jda) and Simon Johansson (tna11sjo)
 def main():
     """
     This program calculates the Fraunhofer and Fresnel graphs given different distances L. Fresnel uses N as number of slits.
@@ -41,11 +40,14 @@ def fresnel(x, L, N):
     :return: Returns the intensity function
     For every point on the screen and for every slit the complex contribution is added.
     """
-    d = 100e-6/N
-    wl = 632e-9
+    d = 100e-6/N    #Width of a single slit
+    wl = 632e-9     #The wavelength
     total = n.zeros_like(x, dtype=n.complex64)
+
     for index, Point in enumerate(x):
         for i in range(-N // 2, N//2):
+            #For each point on the screen, calculates the complex vector summation from all slits.
+            #The absolute value of this vector summation is the resulting intensity of the given point
             hypot = n.sqrt(L**2+(abs(Point)+i*d)**2)
             phase = 2*n.pi*(hypot % wl)/wl
             total[index] += n.exp(phase * 1j)/N

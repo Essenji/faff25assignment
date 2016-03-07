@@ -1,7 +1,7 @@
-import matplotlib as mp
 import numpy as n
 import matplotlib.pyplot as plt
 
+#Code by Jonas Danebjer (kin13jda) and Simon Johansson (tna11sjo)
 
 def main():
     plotReflection(1, 1.75)

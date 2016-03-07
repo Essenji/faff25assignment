@@ -1,7 +1,7 @@
-import matplotlib as mp
 import numpy as n
 import matplotlib.pyplot as plt
 
+#Code by Jonas Danebjer (kin13jda) and Simon Johansson (tna11sjo)
 
 def main():
     h = n.linspace(0, 0.05, 1000)
@@ -27,7 +27,6 @@ def plotDistanceInLens(n2):
     gamma = a1-a2 #gamma = 180 - (180 - a1) - a2
     f2=R*n.sin(a2)/n.sin(gamma)
     return f2+R
-    #plt.figure()
     plt.plot(h, f2+R)
 
 def plotDistanceInLensbk7(n2, wl):
@@ -45,11 +44,6 @@ def plotDistanceInLensbk7(n2, wl):
     plt.legend()
     return f2+R
 
-# def plotDistanceInLensApprox(n2):
-#     n1 = 1
-#     R = 0.15
-#     h = n.linspace(0, 0.05 , 1000)
-#     plt.hlines(n2/((n2-n1)/R), -100, 100)
 
 def plotDistanceInLensApprox(n2):
     n1 = 1
